@@ -90,8 +90,12 @@ Custom instructions let you shape GitHub Copilot’s behavior to match your team
 Now let's generate one with the help of GitHub Copilot.
 
 1. Go to Copilot Chat
+2. Enter in the command `/create-instructions`
+
+(Optional)
 2. Select the gear icon on the top right
 3. Click "Generate Instructions"
+4. This will load the command `/create-instructions` into the chat window
 
 Look over this file and notice how its a good starting point for this project. You can remove or add any instructions your team has in mind!
 
