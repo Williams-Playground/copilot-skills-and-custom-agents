@@ -47,16 +47,19 @@ Provide specific code examples and security recommendations that follow industry
 
 **Adding sources**
 
-7. Select `Add sources` and select `Add files and repositories`
+7. Select `Add sources` and select `Add files and repositories` and enter in the name of your repository like:
+```
+Williams-Playground/copilot-skills-and-custom-agents
+```
 8. Add the following files and press `save`
 ```markdown
-src/components/upload/UploadZone.tsx
+/src/components/upload/UploadZone.tsx
 src/lib/mock-photo-data.ts
 src/app/layout.tsx
 next.config.ts
 ```
 9. Select `Add sources` and select `Link files, pull requests, and issues`
-10. Add issue link `https://github.com/ps-copilot-sandbox/copilot-intermediate-gallery-repo/issues/3` and press `save`
+10. Add issue link `https://github.com/Williams-Playground/copilot-skills-and-custom-agents/issues/2` and press `save`
 11. Select `Add sources` and select `Add text content`
 12. Add the following content and press `save`
 ```markdown
@@ -155,6 +158,8 @@ package.json
 - **Wikis**: GitHub Wiki, Notion, Confluence
 - **Static Sites**: Docusaurus, GitBook, MkDocs
 ```
+
+![Copilot Spaces](../docs/spaces-creation.png)
 
 ### Share your Space[OPTIONAL]
 
