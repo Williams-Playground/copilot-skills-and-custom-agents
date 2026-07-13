@@ -76,17 +76,12 @@ export function GalleryGrid({
             className="group relative card-elevated overflow-hidden"
           >
             {/* Photo Container */}
-            <div className="relative aspect-[4/3] overflow-hidden">
-              {/* Placeholder colored rectangles since we don't have actual images */}
-              <div 
-                className={`w-full h-full ${
-                  index % 6 === 0 ? 'bg-gradient-to-br from-blue-400 to-blue-600' :
-                  index % 6 === 1 ? 'bg-gradient-to-br from-green-400 to-green-600' :
-                  index % 6 === 2 ? 'bg-gradient-to-br from-purple-400 to-purple-600' :
-                  index % 6 === 3 ? 'bg-gradient-to-br from-pink-400 to-pink-600' :
-                  index % 6 === 4 ? 'bg-gradient-to-br from-yellow-400 to-yellow-600' :
-                  'bg-gradient-to-br from-red-400 to-red-600'
-                }`}
+            <div className="relative aspect-[4/3] overflow-hidden bg-slate-200 dark:bg-slate-700">
+              {/* Photo Image */}
+              <img
+                src={photo.url}
+                alt={photo.title}
+                className="w-full h-full object-cover"
               />
               
               {/* Overlay */}
