@@ -124,3 +124,4 @@ If input includes `cover.png`, the script generates files like:
 
 - [GitHub Copilot customizations](https://docs.github.com/en/copilot/how-tos/custom-instructions)
 - [GitHub Copilot agent skills](https://docs.github.com/en/enterprise-cloud@latest/copilot/how-tos/use-copilot-agents/cloud-agent/add-skills)
+- [GitHub Copilot Awesome skills](https://awesome-copilot.github.com/skills/)
