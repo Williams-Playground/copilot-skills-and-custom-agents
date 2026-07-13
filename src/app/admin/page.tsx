@@ -1,9 +1,26 @@
-import { Users, Plus, Eye, Edit, Trash2, Settings } from "lucide-react";
-import Link from "next/link";
-import { Hero, SectionContainer, SectionTitle, FeatureCard, StatsGrid } from "@/components/ui";
-import { dashboardStats, recentGalleries } from "@/lib/mock-admin-data";
+"use client";
 
-export default function AdminPage() {
+import { Suspense, useEffect, useMemo, useState } from "react";
+import { Users, Plus, Settings } from "lucide-react";
+import Link from "next/link";
+import { useSearchParams } from "next/navigation";
+import { Hero, SectionContainer, SectionTitle, FeatureCard, StatsGrid, RecentGalleriesTable } from "@/components/ui";
+import { dashboardStats, recentGalleries, type AdminGallery } from "@/lib/mock-admin-data";
+import { getCustomGalleries } from "@/lib/gallery-storage";
+
+function AdminPageContent() {
+  const searchParams = useSearchParams();
+  const [customGalleries, setCustomGalleries] = useState<AdminGallery[]>([]);
+
+  useEffect(() => {
+    setCustomGalleries(getCustomGalleries());
+  }, []);
+
+  const allGalleries = useMemo(
+    () => [...customGalleries, ...recentGalleries],
+    [customGalleries]
+  );
+
   return (
     <div className="page-gradient">
       <Hero
@@ -12,6 +29,19 @@ export default function AdminPage() {
       />
       
       <SectionContainer>
+        {searchParams.get("created") === "1" && (
+          <div className="mb-6 rounded-lg border border-green-200 bg-green-50 dark:border-green-900/40 dark:bg-green-900/20 p-4 text-green-800 dark:text-green-200">
+            Gallery created successfully. Your new gallery has been added to Recent Galleries.
+          </div>
+        )}
+
+        <div className="mb-8 flex justify-end">
+          <Link href="/admin/galleries/new" className="btn-primary inline-flex items-center gap-2">
+            <Plus className="h-4 w-4" />
+            New Gallery
+          </Link>
+        </div>
+
         {/* Stats Grid */}
         <SectionTitle title="Stats Overview" className="mb-6" />
         <StatsGrid stats={dashboardStats} />
@@ -43,92 +73,20 @@ export default function AdminPage() {
           />
         </div>
 
-        {/* Galleries Table */}
-        <SectionTitle title="Recent Galleries" viewAllLink="/admin/galleries" />
-        <div className="card-base overflow-hidden">
-          <div className="overflow-x-auto">
-            <table className="w-full">
-              <thead className="bg-slate-50 dark:bg-slate-700">
-                <tr>
-                  <th className="text-left py-3 px-6 font-medium text-slate-700 dark:text-slate-300">
-                    Gallery Name
-                  </th>
-                  <th className="text-left py-3 px-6 font-medium text-slate-700 dark:text-slate-300">
-                    Type
-                  </th>
-                  <th className="text-left py-3 px-6 font-medium text-slate-700 dark:text-slate-300">
-                    Photos
-                  </th>
-                  <th className="text-left py-3 px-6 font-medium text-slate-700 dark:text-slate-300">
-                    Views
-                  </th>
-                  <th className="text-left py-3 px-6 font-medium text-slate-700 dark:text-slate-300">
-                    Status
-                  </th>
-                  <th className="text-left py-3 px-6 font-medium text-slate-700 dark:text-slate-300">
-                    Last Updated
-                  </th>
-                  <th className="text-left py-3 px-6 font-medium text-slate-700 dark:text-slate-300">
-                    Actions
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {recentGalleries.map((gallery) => (
-                  <tr key={gallery.id} className="table-row">
-                    <td className="py-4 px-6">
-                      <div className="font-medium text-slate-900 dark:text-white">
-                        {gallery.name}
-                      </div>
-                    </td>
-                    <td className="py-4 px-6">
-                      <span className={`status-badge ${
-                        gallery.type === 'Client Review' ? 'status-private' :
-                        gallery.type === 'Public' ? 'status-active' :
-                        gallery.type === 'Portfolio' ? 'status-private' :
-                        'status-draft'
-                      }`}>
-                        {gallery.type}
-                      </span>
-                    </td>
-                    <td className="py-4 px-6 text-slate-600 dark:text-slate-400">
-                      {gallery.photos}
-                    </td>
-                    <td className="py-4 px-6 text-slate-600 dark:text-slate-400">
-                      {gallery.views.toLocaleString()}
-                    </td>
-                    <td className="py-4 px-6">
-                      <span className={`status-badge ${
-                        gallery.status === 'Active' || gallery.status === 'Published' 
-                          ? 'status-active'
-                          : 'status-draft'
-                      }`}>
-                        {gallery.status}
-                      </span>
-                    </td>
-                    <td className="py-4 px-6 text-slate-600 dark:text-slate-400">
-                      {gallery.lastUpdated}
-                    </td>
-                    <td className="py-4 px-6">
-                      <div className="flex items-center gap-2">
-                        <button className="btn-icon">
-                          <Eye className="h-4 w-4" />
-                        </button>
-                        <button className="btn-icon btn-icon-success">
-                          <Edit className="h-4 w-4" />
-                        </button>
-                        <button className="btn-icon btn-icon-danger">
-                          <Trash2 className="h-4 w-4" />
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
+        <RecentGalleriesTable
+          galleries={allGalleries}
+          title="Recent Galleries"
+          viewAllLink="/admin/galleries"
+        />
       </SectionContainer>
     </div>
+  );
+}
+
+export default function AdminPage() {
+  return (
+    <Suspense>
+      <AdminPageContent />
+    </Suspense>
   );
 }

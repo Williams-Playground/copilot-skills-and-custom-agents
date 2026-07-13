@@ -1,15 +1,33 @@
 import { FolderOpen, Users, BarChart3 } from "lucide-react";
+import { LucideIcon } from "lucide-react";
 
 type StatColor = 'blue' | 'green' | 'purple' | 'orange';
 
-export const dashboardStats = [
+export interface AdminStatItem {
+    label: string;
+    value: string;
+    icon: LucideIcon;
+    color: StatColor;
+}
+
+export interface AdminGallery {
+    id: number;
+    name: string;
+    type: string;
+    photos: number;
+    views: number;
+    status: string;
+    lastUpdated: string;
+}
+
+export const dashboardStats: AdminStatItem[] = [
     { label: "Total Photos", value: "1,234", icon: FolderOpen, color: 'blue' as StatColor },
     { label: "Active Galleries", value: "28", icon: FolderOpen, color: 'green' as StatColor },
     { label: "Client Projects", value: "12", icon: Users, color: 'purple' as StatColor },
     { label: "This Month Views", value: "45,678", icon: BarChart3, color: 'orange' as StatColor },
 ];
 
-export const recentGalleries = [
+export const recentGalleries: AdminGallery[] = [
     {
         id: 1,
         name: "Wedding - Sarah & John",

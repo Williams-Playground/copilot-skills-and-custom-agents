@@ -13,7 +13,7 @@ export interface Photo {
 export const mockPhotos: Photo[] = [
   {
     id: '1',
-    url: '/placeholder-1.jpg',
+    url: '/photo-1.png',
     title: 'Sunset Landscape',
     tags: ['landscape', 'sunset', 'nature'],
     likes: 124,
@@ -24,7 +24,7 @@ export const mockPhotos: Photo[] = [
   },
   {
     id: '2',
-    url: '/placeholder-2.jpg',
+    url: '/photo-2.png',
     title: 'Portrait Study',
     tags: ['portrait', 'studio', 'professional'],
     likes: 89,
@@ -35,7 +35,7 @@ export const mockPhotos: Photo[] = [
   },
   {
     id: '3',
-    url: '/placeholder-3.jpg',
+    url: '/photo-3.png',
     title: 'Architecture',
     tags: ['architecture', 'building', 'city'],
     likes: 156,
@@ -46,7 +46,7 @@ export const mockPhotos: Photo[] = [
   },
   {
     id: '4',
-    url: '/placeholder-4.jpg',
+    url: '/photo-4.png',
     title: 'Nature Close-up',
     tags: ['macro', 'nature', 'flowers'],
     likes: 203,
@@ -57,7 +57,7 @@ export const mockPhotos: Photo[] = [
   },
   {
     id: '5',
-    url: '/placeholder-5.jpg',
+    url: '/photo-5.png',
     title: 'Street Photography',
     tags: ['street', 'candid', 'urban'],
     likes: 91,
@@ -68,7 +68,7 @@ export const mockPhotos: Photo[] = [
   },
   {
     id: '6',
-    url: '/placeholder-6.jpg',
+    url: '/photo-6.png',
     title: 'Wedding Moment',
     tags: ['wedding', 'love', 'ceremony'],
     likes: 267,
@@ -79,7 +79,7 @@ export const mockPhotos: Photo[] = [
   },
   {
     id: '7',
-    url: '/placeholder-7.jpg',
+    url: '/photo-7.png',
     title: 'Mountain Vista',
     tags: ['landscape', 'mountain', 'adventure'],
     likes: 189,
@@ -90,7 +90,7 @@ export const mockPhotos: Photo[] = [
   },
   {
     id: '8',
-    url: '/placeholder-8.jpg',
+    url: '/photo-8.png',
     title: 'Urban Nightscape',
     tags: ['night', 'city', 'lights'],
     likes: 234,
@@ -101,7 +101,7 @@ export const mockPhotos: Photo[] = [
   },
   {
     id: '9',
-    url: '/placeholder-9.jpg',
+    url: '/photo-9.png',
     title: 'Wildlife Portrait',
     tags: ['wildlife', 'nature', 'animal'],
     likes: 312,
@@ -109,5 +109,38 @@ export const mockPhotos: Photo[] = [
     views: 4321,
     photographer: 'Tom Anderson',
     dateTaken: '2023-12-20'
+  },
+  {
+    id: '10',
+    url: '/photo-10.png',
+    title: 'Coastal Dawn Cliffs',
+    tags: ['landscape', 'coast', 'sunrise', 'nature'],
+    likes: 228,
+    downloads: 84,
+    views: 2714,
+    photographer: 'Nina Patel',
+    dateTaken: '2026-06-18'
+  },
+  {
+    id: '11',
+    url: '/photo-11.png',
+    title: 'Rainy Crosswalk Portrait',
+    tags: ['portrait', 'street', 'rain', 'urban'],
+    likes: 173,
+    downloads: 59,
+    views: 1938,
+    photographer: 'Ethan Rivera',
+    dateTaken: '2026-05-02'
+  },
+  {
+    id: '12',
+    url: '/photo-12.png',
+    title: 'Glass Atrium Geometry',
+    tags: ['architecture', 'geometry', 'interior', 'modern'],
+    likes: 261,
+    downloads: 97,
+    views: 3186,
+    photographer: 'Maya Thompson',
+    dateTaken: '2026-03-27'
   }
 ];
