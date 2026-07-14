@@ -1,73 +1,88 @@
 # Photo Gallery & Portfolio
 
-A professional photo gallery and portfolio application built with Next.js 15, TypeScript, and Tailwind CSS. This project is designed for **demoing GitHub Copilot features** in a real-world, component-driven Next.js application. The included demos showcase how Copilot can assist with code generation, refactoring, UI building, and more.
+![Next.js](https://img.shields.io/badge/Next.js-15-black)
+![TypeScript](https://img.shields.io/badge/TypeScript-Strict-3178C6)
+![License](https://img.shields.io/badge/License-MIT-green)
 
-## Demos
+A security-focused **Photo Gallery & Portfolio** application built with **Next.js 15** and **TypeScript**.
 
-- All demo guides and examples are in the [`demos/`](demos/) folder.
-- For more information about each demo, refer to the [README](demos/README.md) file in the `demos/` directory.
-- To get started, check out the first demo [`features-demo.md`](demos/features-demo.md) for a walkthrough of gallery features and Copilot capabilities.
+## Tech Stack
 
-### Creating a New Demo
+- Next.js 15 (App Router)
+- TypeScript
+- React 19
+- Tailwind CSS
+- react-dropzone
+- Framer Motion
+- Lucide React
 
-If you want to contribute and create a new demo, follow these steps:
+## Prerequisites
 
-1. Open GitHub Copilot Chat.
-2. Type the prompt `/create-copilot-demo' with an explanation of your demo idea
-3. Copilot will generate a new demo file in the `demos/` directory.
-4. Fill in remaining sections with detailed instructions, examples, and expected results.
+- Node.js 18+
+- npm (or yarn / pnpm)
 
-After finishing the demo, don't forget this quick follow-up:
+## Installation
 
-1. Add in the overview, key skills, and demo link to the [demo README](demos/README.md)
+```bash
+git clone https://github.com/Williams-Playground/copilot-skills-and-custom-agents.git
+cd copilot-skills-and-custom-agents
+npm install
+npm run dev
+```
 
-## Getting Started
+Open [http://localhost:3000](http://localhost:3000).
 
-### Technical Requirements
+## Environment Variables
 
-- **Node.js** v18 or newer
-- **npm** (or yarn, pnpm, bun)
+Create a `.env.local` file for runtime configuration:
 
-### Quick Start with GitHub Codespaces
+```bash
+NEXT_PUBLIC_API_URL=
+UPLOAD_STORAGE_BUCKET=
+UPLOAD_STORAGE_REGION=
+UPLOAD_MAX_FILE_SIZE_MB=10
+```
 
-The fastest way to get started is using GitHub Codespaces:
+> These values are placeholders for future API/storage integration.
 
-1. Click the **"Code"** button on the GitHub repository page
-2. Select the **"Codespaces"** tab
-3. Click **"Create codespace on main"** (or your current branch)
-4. Wait for the codespace to build and start
+## Available Scripts
 
-The codespace will automatically:
-- Install all dependencies (`npm install`)
-- Start the development server (`npm run dev`)
-- Configure GitHub Copilot and essential VS Code extensions
-- Forward port 3000 for the Next.js application
-
-Once ready, you can access the application at the forwarded port URL provided in the terminal.
-
-### Local Installation
-
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/ps-copilot-sandbox/copilot-intermediate-gallery-repo.git
-   cd gallery-repo
-   ```
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
-3. Start the development server:
-   ```bash
-   npm run dev
-   ```
-   Open [http://localhost:3000](http://localhost:3000) in your browser.
+- `npm run dev` — Start development server
+- `npm run build` — Build for production
+- `npm run start` — Run production server
+- `npm run lint` — Run ESLint checks
 
 ## Project Structure
 
-```bash
+```text
 src/
-├── app/                 # Next.js 15 App Router pages
-├── components/          # Reusable React components
-├── lib/                 # Utility functions and helpers
-demos/                   # Demo guides and templates
+├── app/            # Next.js app router pages and layouts
+├── components/     # UI, gallery, and upload components
+└── lib/            # Mock data and shared utilities
+docs/
+├── api/            # OpenAPI specifications
+├── components/     # Component documentation
+└── adr/            # Architecture decision records
 ```
+
+## Security Features
+
+- Security-first design aligned with **OWASP Top 10** principles
+- File upload constraints for type and size (JPEG/PNG/GIF/WebP, max 10MB)
+- Input validation and sanitization expectations on API boundaries
+- JWT bearer-token based authentication model for protected API endpoints
+
+## Deployment
+
+Typical production workflow:
+
+1. `npm run build`
+2. `npm run start` for self-hosted runtime, or deploy to a Next.js-compatible platform (for example Vercel)
+
+## Contributing
+
+See [CONTRIBUTING.md](./CONTRIBUTING.md).
+
+## License
+
+MIT — see [LICENSE](./LICENSE).
