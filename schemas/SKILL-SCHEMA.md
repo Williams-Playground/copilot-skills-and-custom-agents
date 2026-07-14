@@ -61,10 +61,8 @@ allowed-tools: <Space-separated string of pre-approved tools the skill may use. 
 
 The file **must** begin with a YAML frontmatter block delimited by `---`.
 
-| Field | Type | Required | Description |
-|-------|------|----------|-------------|
-| `name` | `string` | ✅ | A unique kebab-case identifier for the skill (e.g., `code-review-csharp`, `api-docs-generator`). Must match the folder name. |
-| `description` | `string` | ✅ | A natural-language sentence (or short paragraph) describing **when** the skill should be activated. GitHub Copilot matches user requests against this description to decide whether to invoke the skill. Include trigger phrases the user might say (e.g., *"Use when the user asks to review C# code"*). Maximum 500 characters. |
+- `name` (`string`, required): A unique kebab-case identifier for the skill (e.g., `code-review-csharp`, `api-docs-generator`). Must match the folder name.
+- `description` (`string`, required): A natural-language sentence (or short paragraph) describing **when** the skill should be activated. GitHub Copilot matches user requests against this description to decide whether to invoke the skill. Include trigger phrases the user might say (e.g., *"Use when the user asks to review C# code"*). Maximum 500 characters.
 
 ### Effective descriptions
 
@@ -73,8 +71,8 @@ Before testing, it helps to know what a good description looks like. A few princ
 - Use imperative phrasing. Frame the description as an instruction to the agent: “Use this skill when…” rather than “This skill does…” The agent is deciding whether to act, so tell it when to act.
 - Focus on user intent, not implementation. Describe what the user is trying to achieve, not the skill’s internal mechanics. The agent matches against what the user asked for.
 - Err on the side of being pushy. Explicitly list contexts where the skill applies, including cases where the user doesn’t name the domain directly: “even if they don’t explicitly mention ‘CSV’ or ‘analysis.’”
-- Keep it concise. A few sentences to a short paragraph is usually right — long enough to cover the skill’s scope, short enough that it doesn’t bloat the agent’s context across many skills. The specification enforces a hard limit of 1024 characters.
-​
+- Keep it concise. A few sentences to a short paragraph is usually right — long enough to cover the skill’s scope, short enough that it doesn’t bloat the agent’s context across many skills. The specification enforces a hard limit of 500 characters.
+
 [Effective descriptions](https://agentskills.io/skill-creation/optimizing-descriptions)
 
 ### Markdown Body (Required)
@@ -176,23 +174,23 @@ A section of non-negotiable rules the skill must always follow.
 - Prioritize issues by severity: 🔴 Critical → 🟡 Warning → 🔵 Info
 ```
 
-### 6. Examples / Edge Cases
+### 5. Examples / Edge Cases
 
 One or more worked examples showing input → output pairs. This helps Copilot understand the expected quality and format.
 
-```markdown
+````markdown
 ## Examples
 
 ### Example: Reviewing a simple class
 
 **Input:**
-```csharp
+~~~csharp
 public class userManager {
     public void deleteUser(int id) {
         // delete
     }
 }
-```
+~~~
 
 **Output:**
 | Severity | Location | Issue | Suggestion |
@@ -200,9 +198,9 @@ public class userManager {
 | 🟡 Warning | Class name | `userManager` doesn't follow PascalCase | Rename to `UserManager` |
 | 🟡 Warning | Method name | `deleteUser` doesn't follow PascalCase | Rename to `DeleteUser` |
 | 🔵 Info | Method body | Empty implementation with comment | Add implementation or throw `NotImplementedException` |
-```
+````
 
-### 7. Validation Checklist
+### 6. Validation Checklist
 
 A checklist the skill uses to verify its own output before presenting it to the user.
 
@@ -217,7 +215,7 @@ Before finalizing, verify:
 - [ ] Output follows the defined structure
 ```
 
-### 8. References
+### 7. References
 
 Links to documentation, style guides, or other resources the skill draws from.
 
@@ -318,8 +316,45 @@ Reference a skill in your VS Code settings (`.vscode/settings.json`):
 
 ---
 
-## Version
+# Sharing Skills
 
-| Version | Date | Changes |
-|---------|------|---------|
-| 1.0 | February 18, 2026 | Initial schema specification |
+## Installing a skill from a shared repository
+
+Install a skill. You can run `gh skill install` with no arguments for a fully interactive flow, or specify a repository to browse its skills interactively:
+
+```
+gh skill install OWNER/REPOSITORY SKILL
+```
+
+
+## Publishing skills
+
+If you maintain a skills repository, you can validate and publish your skills using GitHub CLI.
+
+To validate your skills against the Agent Skills specification and check remote settings like tag protection, secret scanning, and code scanning, without publishing, use --dry-run:
+```
+gh skill publish --dry-run
+```
+To auto-fix metadata issues in your skill files, use --fix. This does not publish your skills:
+```
+gh skill publish --fix
+```
+To validate and publish your skills:
+```
+gh skill publish
+```
+
+### Skill Directory Structure
+
+A skill is a directory containing, at minimum, a SKILL.md file:
+
+```
+skill-name/
+├── SKILL.md          # Required: metadata + instructions
+├── scripts/          # Optional: executable code
+├── references/       # Optional: documentation
+├── assets/           # Optional: templates, resources
+└── ...               # Any additional files or directories
+```
+
+[Optional Directories](https://agentskills.io/specification#optional-directories)
